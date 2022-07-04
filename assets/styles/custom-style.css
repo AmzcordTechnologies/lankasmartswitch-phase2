@@ -1,0 +1,81 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* @font-face {
+  font-family: 'team_knowhow_tondolight';
+  src: url('/fonts/team_knowhow_tondo_light-webfont.woff2') format('woff2'),
+    url('/fonts/team_knowhow_tondo_light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+} */
+font-family: poppins !important;
+
+.container {
+  max-width: 1250px;
+}
+
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#target {
+  width: 700px;
+  padding: 5px;
+  display: none;
+  /* border-radius: 20px; */
+}
+
+.Hide {
+  display: none;
+}
+
+i.fa.fa-times.Hide {
+  font-size: 34px;
+  margin-right: 40px;
+  color: #3a4d6f;
+}
+
+input#target {
+  margin-right: 10px;
+}
+
+p {
+  /* line-height: 2; */
+  line-height: 24.5px;
+}
+
+p.alert {
+  color: #05204f;
+  font-size: 15px;
+}
+
+h3.shopCatTitle {
+  font-weight: 900;
+  color: #05204f;
+  /* border-bottom: 4px solid #05204f; */
+}
+
+hr.shopCatTitle {
+  border: 1px solid #05204e;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

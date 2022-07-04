@@ -1,0 +1,149 @@
+<div id="shop" v-cloak>
+
+  <div class="container-fluid top bar">
+    <div class="row">
+
+      <div class="col-lg-6 col-md-12 d-none d-lg-block">
+        <p class="title-bar">Working Hours : Monday - Friday : 8.30 am - 5.30 pm / Saturday : 8.30 am - 1.30 pm.</p>
+      </div>
+
+      <div class="col-lg-6 col-md-12">
+        <div class="row">
+          <div class="col-5">
+            <p class="title-bar contact end">|<i class="fa fa-phone" aria-hidden="true"></i> (+94) 777 00 4306</p>
+          </div>
+          <div class="col-7">
+            <p class="title-bar contact left">|<i class="fa fa-envelope" aria-hidden="true"></i> lankasmartswitch@gmail.com</p>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container-fluid market page">
+    <div class="row market-place mt-5">
+
+      <div class="col-lg-3 md-12 d-none d-lg-block">
+        <div class="cat-list">
+          <h5>Categories</h5>
+          <hr>
+          <ul>
+            <a v-for="catagory in catagoryData" :href="listView+'/'+catagory.slug">
+              <li class="mt-3" @click="selectItem(catagory.id)"><i class="fa fa-angle-right" aria-hidden="true"></i>{{catagory.name}}
+              </li>
+            </a>
+          </ul>
+          <button id="search" type="submit" name="button" class="d-none">Send</button>
+        </div>
+        <div class="cat-list">
+          <h5>Brands</h5>
+          <hr>
+          <ul>
+            <li><i class="fa fa-angle-right" aria-hidden="true"></i> Moes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-9 md-12">
+        <div class="mt-4">
+          <div class="row">
+            <div class="col-lg-4 md-12">
+              <h3 v-if="findCat" class="shopCatTitle">{{category.name}}</h3>
+              <h3 v-else class="shopCatTitle">Smart Products</h3>
+            </div>
+            <div class="col-lg-8 md-12">
+              <form v-bind:action="listView">
+
+                <div class="input-group d-none d-md-block d-sm-block d-block d-lg-none">
+                  <select class="form-control custom-select" id="type" name="slug" v-model="formData.category">
+                    <option value="" selected>Categories</option>
+                    <option v-for="catagory in catagoryData" :value="catagory.slug">{{catagory.name}}</option>
+                  </select>
+                </div>
+
+                <div class="input-group">
+                  <input type="search" class="form-control rounded search" name="name" placeholder="I'm shopping for..." aria-label="Search" aria-describedby="search-addon" v-model="formData.name" />
+                  <button type="submit" class="btn btn-outline-primary search">search</button>
+                </div>
+
+              </form>
+            </div>
+
+          </div>
+
+          <hr class="shopCatTitle">
+        </div>
+
+
+        <div class="container mt-2">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 item" v-for="item in data">
+              <a v-bind:href="'/shop/singleitem/'+item.slug">
+                <div class="card item-card card-block mt-1">
+                  <img :src="item.image" class="item-image" alt="Photo of sunset">
+                  <!-- <h5 class="item-card-title mt-3 mb-3">Wifi Smart Touch Light Switch 1 Gang (Live Wire Only) -2V</h5> -->
+                  <h5 class="item-card-title mt-3 mb-3">{{item.name}}</h5>
+
+                  <div class="price">
+                    RS: {{convertCurrency(item.amount)}}
+                  </div>
+
+                  <div class="btn btn-success">
+                    <a v-bind:href="'/shop/singleitem/'+item.slug">View more </a>
+                  </div>
+
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-5" v-if="data.length == 0">
+            <div class="text-center p-5">
+              <img src="/images/magifire.png" class="img-fluid m-auto pb-4" width="50px" alt="">
+              <p class="alert"> Sorry, we couldn't find any result for your search.</p>
+            </div>
+          </div>
+
+          <!-- Pegination -->
+          <nav aria-label="Page navigation example " class="table-pagination mt-4" v-if="data.length > 0">
+            <ul class="pagination justify-content-end">
+              <ul class="pagination">
+
+                <li :class="page == 0 ? 'page-item disabled' : 'page-item'">
+                  <a class="page-link peginate" :href="listView+'?page=0'" tabindex="-1">Start</a>
+                </li>
+
+                <li :class="page == 0 ? 'page-item disabled' : 'page-item'">
+                  <a class="page-link peginate" :href="listView+'?page='+(page-1)" tabindex="-1">Previous</a>
+                </li>
+
+                <li :class="page == n ? 'page-item active' : 'page-item'" v-for="n in pagination(page,pageCount-1)">
+                  <a class="page-link peginate" :href="listView+'?page='+(n)">{{n+1}}</a>
+                </li>
+
+                <li :class="page+1 >= pageCount ? 'page-item disabled' : 'page-item'">
+                  <a class="page-link peginate" :href="listView+'?page='+(page+1)" tabindex="-1">Next</a>
+                </li>
+
+                <li :class="page+1 >= pageCount ? 'page-item disabled' : 'page-item'">
+                  <a class="page-link peginate" :href="listView+'?page='+(pageCount-1)" tabindex="-1">End</a>
+                </li>
+
+              </ul>
+            </ul>
+          </nav>
+
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

@@ -1,0 +1,17 @@
+a.page-link.peginate {
+  color: #05204f !important;
+  font-size: 15px;
+}
+
+a.page-link.peginate {
+  border: 1px solid #ff000000 !important;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff !important;
+  background-color: #05204f;
+  border-color: #05204f !important;
+  /* border-radius: 50%; */
+  font-size: px;
+}

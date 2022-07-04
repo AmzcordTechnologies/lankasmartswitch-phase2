@@ -1,0 +1,119 @@
+<div id="singleitem" v-cloak>
+
+  <div class="container singlePage">
+    <h2 class="text-center">{{data.name}}</h2>
+    <h5>Home >> Shop >>{{data.name}}</h5>
+  </div>
+
+  <div class="container singlePage details">
+    <div class="row">
+      <div class="col-lg-4 md-12">
+        <div class="carouselSingle">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item" :class="[index == 0?' active':'']" v-for="(slide,index) in sliderArr" v-if="slide.image != ''">
+                <div class="d-block">
+                  <img class="d-block w-100" :src="slide.image" alt="First slide">
+                </div>
+                <!-- <img class="d-block w-100" src="\images\poltrona_muroazzurro_I3.jpeg" alt="Third slide"> -->
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 md-12">
+        <label>{{data.name}}</label><br>
+        <label class="price">RS. {{convertCurrency(data.amount)}}</label>
+        <hr>
+        <div class="a-row">
+          <label class="a-form-label">Color:</label>
+          <!-- <span class="selection hover">{{data.color}}</span> -->
+        </div>
+
+        <div class="row colorPick mb-3">
+          <div class="whitePick mr-1" :style="'background-color:'+data.color+'; border:1px solid'+data.color">
+          </div>
+          <!-- <div class="blackPick mr-1">
+          </div>
+          <div class="bluePick">
+          </div> -->
+        </div>
+        <!-- <hr> -->
+        <br>
+      <template id="" v-if="data.category">
+        <label class="a-form-label">Categories:</label>
+        <span class="selection hover">{{data.category.name}}</span>
+      </template>
+
+        <!-- <hr> -->
+        <br>
+        <div class="outOfStock" v-if="data.quentity == 0">
+          <label class="stock">Out of stock</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container singlePage mt-5">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-link active" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Discription</a>
+        <a class="nav-link" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Additional Information</a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <br>
+        <p v-html="data.description"></p>
+      </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <br>
+        <p v-html="data.additional_information"></p>
+
+      </div>
+    </div>
+  </div>
+  <div class="container singlePage mb-5">
+    <hr>
+    <h4>Related Items</h4>
+    <div class="row mb-4">
+
+      <div class="col-lg-3 col-sm-6" v-for="item in relatedItems">
+        <a v-bind:href="'/shop/singleitem/'+item.slug">
+        <div class="card item-card card-block mt-1">
+          <img :src="item.image" alt="Photo of sunset">
+          <h5 class="item-card-title mt-3 mb-3">{{item.name}}</h5>
+          <div class="price">
+            RS. {{convertCurrency(item.amount)}}
+          </div>
+
+          <a v-bind:href="'/shop/singleitem/'+item.slug" class="btn btn-success">
+            <div>
+              Select
+            </div>
+          </a>
+
+        </div>
+        </a>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
